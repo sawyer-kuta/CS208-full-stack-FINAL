@@ -1,8 +1,65 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html {
+  background-color: #10291D;
+  color: #F7F7F7;
 }
 
-a {
-  color: #00B7FF;
+h1 {
+  title: 'Italianno', cursive;
+  color: #F7F7F7;
+  font-size: 35px;
+}
+
+body {
+  font-family: Montserrat;
+}
+
+nav a {
+  background-color: #10291D;
+  color: #F7F7F7;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+.logo-container {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.hero {
+  text-align: center;
+  background-color: #F7F7F7;
+  color: #000000;
+  padding: 50px;
+  margin: 40px;
+  border-radius: 10px;
+  min-height: 60vh;
+}
+
+.menu-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.about {
+  text-align: center;
+  background-color: #F7F7F7;
+  color: #000000;
+  padding: 50px;
+  margin: 40px;
+  border-radius: 10px;
+  min-height: 60vh;
+}
+
+.hero img {
+  float: left;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  width: 505px;
+  height: auto;
+}
+
+.hero h1 {
+  color: #000000;
 }

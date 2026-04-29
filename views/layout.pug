@@ -3,10 +3,17 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css2?family=Italianno&family=Montserrat&display=swap')
   body
     nav
-      a(href='/') Home 
-      a(href='/menu') Menu 
-      a(href='/about') About Us 
-      a(href='/comments') Comments
+      a(href='/')  Home |
+      a(href='/menu')  Menu |
+      a(href='/about')  About Us |
+      a(href='/comments')  Comments
+
+    div.logo-container
+      img(src='/images/logo_green.png', alt='Downtown Donuts logo' id='logo')
+
     block content
+
+
