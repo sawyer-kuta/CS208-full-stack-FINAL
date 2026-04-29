@@ -63,3 +63,10 @@ nav a {
 .hero h1 {
   color: #000000;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 200px;
+}

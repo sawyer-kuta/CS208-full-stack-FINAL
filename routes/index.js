@@ -18,41 +18,46 @@ router.get('/comments', function(req, res) {
   res.render('comments', { title: 'Comments' });
 });
 
+router.get('/api/comments', function(req, res) {
+  req.db.query('SELECT * FROM comments;', function(err, results) {
+    if (err) {
+      return res.status(500).json({ error: 'Failed to load comments.' });
+    }
+    res.json({ comments: results });
+  });
+});
 
-router.post('/create', function (req, res, next) {
-    const { task } = req.body;
+router.post('/api/comments', function(req, res) {
+    const { name, message } = req.body;
+
+    if (!name || !name.trim()) {
+        return res.status(400).json({ error: 'Name is required.' });
+    }
+    if (!message || !message.trim()) {
+        return res.status(400).json({ error: 'Message is required.' });
+    }
+    if (name.trim().length > 20) {
+        return res.status(400).json({ error: 'Name must be under 20 characters.' });
+    }
+    if (message.trim().length > 500) {
+        return res.status(400).json({ error: 'Message must be under 500 characters.' });
+    }
+    
+    console.log('Received comment:', name, message);
     try {
-      req.db.query('INSERT INTO todos (task) VALUES (?);', [task], (err, results) => {
-        if (err) {
-          console.error('Error adding todo:', err);
-          return res.status(500).send('Error adding todo');
-        }
-        console.log('Todo added successfully:', results);
-        // Redirect to the home page after adding
-        res.redirect('/');
-      });
+        req.db.query('INSERT INTO comments (name, message) VALUES (?, ?);', [name, message], (err, results) => {
+            if (err) {
+                console.error('Error adding comment:', err);
+                return res.status(500).json({ error: 'Error adding comment' });
+            }
+            console.log('Comment added successfully:', results);
+            res.status(201).json({ success: true });
+        });
     } catch (error) {
-      console.error('Error adding todo:', error);
-      res.status(500).send('Error adding todo');
+        console.error('Error adding comment:', error);
+        res.status(500).json({ error: 'Error adding comment' });
     }
 });
 
-router.post('/delete', function (req, res, next) {
-    const { id } = req.body;
-    try {
-      req.db.query('DELETE FROM todos WHERE id = ?;', [id], (err, results) => {
-        if (err) {
-          console.error('Error deleting todo:', err);
-          return res.status(500).send('Error deleting todo');
-        }
-        console.log('Todo deleted successfully:', results);
-        // Redirect to the home page after deletion
-        res.redirect('/');
-    });
-    }catch (error) {
-        console.error('Error deleting todo:', error);
-        res.status(500).send('Error deleting todo:');
-    }
-});
 
 module.exports = router;

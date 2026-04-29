@@ -1,4 +1,15 @@
-extends layout 
+extends layout
 
 block content
-    h1 Comments
+  h1 Comments
+  div.hero
+    div#comments-list
+        p Loading comments...
+    p#error-message
+    form(id='commentForm')
+        label(for='name') Name
+        input(type='text', id='name', name='name')
+        label(for='message') Message
+        textarea(id='message', name='message')
+        button(type='submit') Post Comment
+  script(src='/javascripts/comments.js')
