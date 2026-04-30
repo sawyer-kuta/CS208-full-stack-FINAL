@@ -4,7 +4,7 @@ html {
 }
 
 h1 {
-  title: 'Italianno', cursive;
+  font-family: 'Italianno', cursive;
   color: #F7F7F7;
   font-size: 35px;
 }

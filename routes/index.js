@@ -19,11 +19,15 @@ router.get('/comments', function(req, res) {
 });
 
 router.get('/api/comments', function(req, res) {
-  req.db.query('SELECT * FROM comments;', function(err, results) {
+  const limit = 10;
+  const page = parseInt(req.query.page) || 1;
+  const offset = (page - 1) * limit;
+
+  req.db.query('SELECT * FROM comments ORDER BY created_at DESC LIMIT ? OFFSET ?', [limit, offset], function(err, results) {
     if (err) {
       return res.status(500).json({ error: 'Failed to load comments.' });
     }
-    res.json({ comments: results });
+    res.json({ comments: results, page });
   });
 });
 
@@ -45,7 +49,7 @@ router.post('/api/comments', function(req, res) {
     
     console.log('Received comment:', name, message);
     try {
-        req.db.query('INSERT INTO comments (name, message) VALUES (?, ?);', [name, message], (err, results) => {
+        req.db.query('INSERT INTO comments (name, message, created_at) VALUES (?, ?, NOW())', [name, message], (err, results) => {
             if (err) {
                 console.error('Error adding comment:', err);
                 return res.status(500).json({ error: 'Error adding comment' });
@@ -58,6 +62,5 @@ router.post('/api/comments', function(req, res) {
         res.status(500).json({ error: 'Error adding comment' });
     }
 });
-
 
 module.exports = router;
