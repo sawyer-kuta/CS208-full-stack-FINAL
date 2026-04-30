@@ -126,6 +126,15 @@ form {
 #comments-list {
   flex: 1;
   padding: 1rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+}
+
+article {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 footer {
