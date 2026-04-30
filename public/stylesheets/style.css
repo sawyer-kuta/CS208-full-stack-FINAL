@@ -27,10 +27,9 @@ nav a {
 }
 
 .logo-bottom {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  text-align: center;
+  margin-top: 2rem;
+  clear: both;
 }
 
 .hero .logo-bottom img {
@@ -60,6 +59,11 @@ nav a {
   width: 680px;
   height: auto;
   padding-top: 10px;
+  max-width: 100%
+}
+
+.order-links {
+  margin-top: 150px;
 }
 
 .menu-container {
