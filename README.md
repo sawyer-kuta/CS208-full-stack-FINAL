@@ -6,6 +6,11 @@
 
 ## Project Description
 
+This is a full stack web application for CS208 as a final project. The website follows
+guidelines specified by a mock client asking for a simple business webpage. The site
+uses a navigation hub to travel to multiple pages as requested. A key feature is the
+implementation of a comments page, complete with front and back-end validation as well
+as pagination to scale with the site.
 
 ## Setup Instructions
 
