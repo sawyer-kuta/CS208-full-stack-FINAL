@@ -41,7 +41,6 @@ router.post('/api/comments', function(req, res) {
     if (!req.db) {
       return res.status(500).json({ error: 'Database not available' });
     }
-
     if (!name || !name.trim()) {
         return res.status(400).json({ error: 'Name is required.' });
     }
