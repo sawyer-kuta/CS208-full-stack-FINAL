@@ -29,24 +29,31 @@ form.addEventListener('submit', commentHandler);
 
 async function commentHandler(event) {
     event.preventDefault();
+
     const name = document.getElementById('name').value;
     const message = document.getElementById('message').value;
 
     button.disabled = true;
 
-    const response = await fetch('/api/comments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, message: message })
-    });
+    try {
+        const response = await fetch('/api/comments', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, message })
+        });
 
-    if (response.ok) {
-        loadComments();
-        document.getElementById('name').value = '';
-        document.getElementById('message').value = '';
-    } else {
-        const data = await response.json();
-        document.getElementById('error-message').textContent = data.error;
+        if (response.ok) {
+            loadComments();
+            document.getElementById('name').value = '';
+            document.getElementById('message').value = '';
+            document.getElementById('error-message').textContent = '';
+        } else {
+            const data = await response.json();
+            document.getElementById('error-message').textContent = data.error;
+        }
+
+    } finally {
+        button.disabled = false;
     }
 }
 
@@ -54,7 +61,5 @@ document.getElementById('loadMore').addEventListener('click', () => {
     page++;
     loadComments();
 });
-
-button.disabled = false;
 
 loadComments();

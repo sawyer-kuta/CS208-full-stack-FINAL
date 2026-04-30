@@ -46,21 +46,19 @@ router.post('/api/comments', function(req, res) {
     if (message.trim().length > 500) {
         return res.status(400).json({ error: 'Message must be under 500 characters.' });
     }
-    
-    console.log('Received comment:', name, message);
-    try {
-        req.db.query('INSERT INTO comments (name, message, created_at) VALUES (?, ?, NOW())', [name, message], (err, results) => {
+
+    req.db.query(
+        'INSERT INTO comments (name, message, created_at) VALUES (?, ?, NOW())',
+        [name, message],
+        function(err, results) {
             if (err) {
                 console.error('Error adding comment:', err);
                 return res.status(500).json({ error: 'Error adding comment' });
             }
-            console.log('Comment added successfully:', results);
+
             res.status(201).json({ success: true });
-        });
-    } catch (error) {
-        console.error('Error adding comment:', error);
-        res.status(500).json({ error: 'Error adding comment' });
-    }
+        }
+    );
 });
 
 module.exports = router;
