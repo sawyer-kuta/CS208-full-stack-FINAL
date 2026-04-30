@@ -4,9 +4,12 @@ async function loadComments() {
     const response = await fetch(`/api/comments?page=${page}`);
     const data = await response.json();
     const list = document.getElementById('comments-list');
-    list.innerHTML = '';
 
-     if (data.comments.length === 0) {
+    if (page === 1) {
+        list.innerHTML = '';
+    }
+
+    if (data.comments.length === 0 && page === 1) {
         list.innerHTML = '<p>No comments yet.</p>';
         return;
     }
@@ -14,12 +17,20 @@ async function loadComments() {
     for (let i = 0; i < data.comments.length; i++) {
         const comment = data.comments[i];
         const div = document.createElement('div');
-        const date = new Date(comment.created_at).toLocaleDateString();
-        div.innerHTML = `
-            <strong>${comment.name}</strong>
-            <p>${comment.message}</p>
-            <small>${date}</small>
-        `;
+
+        const nameEl = document.createElement('strong');
+        nameEl.textContent = comment.name;
+
+        const msgEl = document.createElement('p');
+        msgEl.textContent = comment.message;
+
+        const dateEl = document.createElement('small');
+        dateEl.textContent = new Date(comment.created_at).toLocaleDateString();
+
+        div.appendChild(nameEl);
+        div.appendChild(msgEl);
+        div.appendChild(dateEl);
+
         list.appendChild(div);
     }
 }

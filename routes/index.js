@@ -23,6 +23,10 @@ router.get('/api/comments', function(req, res) {
   const page = parseInt(req.query.page) || 1;
   const offset = (page - 1) * limit;
 
+  if (!req.db) {
+    return res.status(500).json({ error: 'Database not available' });
+  }
+
   req.db.query('SELECT * FROM comments ORDER BY created_at DESC LIMIT ? OFFSET ?', [limit, offset], function(err, results) {
     if (err) {
       return res.status(500).json({ error: 'Failed to load comments.' });
@@ -33,6 +37,10 @@ router.get('/api/comments', function(req, res) {
 
 router.post('/api/comments', function(req, res) {
     const { name, message } = req.body;
+
+    if (!req.db) {
+      return res.status(500).json({ error: 'Database not available' });
+    }
 
     if (!name || !name.trim()) {
         return res.status(400).json({ error: 'Name is required.' });
