@@ -27,6 +27,9 @@ async function loadComments() {
 const form = document.getElementById('commentForm');
 form.addEventListener('submit', commentHandler);
 
+const formButton = document.getElementById('commentForm');
+const button = formButton.querySelector('button');
+
 async function commentHandler(event) {
     event.preventDefault();
 
