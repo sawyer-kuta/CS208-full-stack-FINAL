@@ -1,37 +1,41 @@
 let page = 1;
 
 async function loadComments() {
-    const response = await fetch(`/api/comments?page=${page}`);
-    const data = await response.json();
-    const list = document.getElementById('comments-list');
+    try {
+        const response = await fetch(`/api/comments?page=${page}`);
+        const data = await response.json();
+        const list = document.getElementById('comments-list');
 
-    if (page === 1) {
-        list.innerHTML = '';
-    }
+        if (page === 1) {
+            list.innerHTML = '';
+        }
 
-    if (data.comments.length === 0 && page === 1) {
-        list.innerHTML = '<p>No comments yet.</p>';
-        return;
-    }
+        if (data.comments.length === 0 && page === 1) {
+            list.innerHTML = '<p>No comments yet.</p>';
+            return;
+        }
 
-    for (let i = 0; i < data.comments.length; i++) {
-        const comment = data.comments[i];
-        const div = document.createElement('div');
+        for (let i = 0; i < data.comments.length; i++) {
+            const comment = data.comments[i];
+            const article = document.createElement('article');
 
-        const nameEl = document.createElement('strong');
-        nameEl.textContent = comment.name;
+            const nameEl = document.createElement('strong');
+            nameEl.textContent = comment.name;
 
-        const msgEl = document.createElement('p');
-        msgEl.textContent = comment.message;
+            const msgEl = document.createElement('p');
+            msgEl.textContent = comment.message;
 
-        const dateEl = document.createElement('small');
-        dateEl.textContent = new Date(comment.created_at).toLocaleDateString();
+            const dateEl = document.createElement('small');
+            dateEl.textContent = new Date(comment.created_at).toLocaleDateString();
 
-        div.appendChild(nameEl);
-        div.appendChild(msgEl);
-        div.appendChild(dateEl);
+            article.appendChild(nameEl);
+            article.appendChild(msgEl);
+            article.appendChild(dateEl);
 
-        list.appendChild(div);
+            list.appendChild(article);
+        }
+    } catch (error) {
+        document.getElementById('comments-list').innerHTML = '<p>Unable to load comments. Please try again later.</p>';
     }
 }
 
@@ -65,7 +69,8 @@ async function commentHandler(event) {
             const data = await response.json();
             document.getElementById('error-message').textContent = data.error;
         }
-
+    } catch (error) {
+        document.getElementById('error-message').textContent = 'Unable to reach the server. Please try again later.';
     } finally {
         button.disabled = false;
     }
