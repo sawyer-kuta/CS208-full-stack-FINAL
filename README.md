@@ -46,6 +46,16 @@ npm start
 ### Access the Application
 On Codespaces, forward port 3000 and open it in your browser.
 
+### Restarting After Codespace Restart
+If the database connection is lost after restarting your Codespace, run:
+
+```bash
+sudo service mysql start
+npm start
+```
+
+MySQL must be running before starting the application.
+
 ## Design Decisions
 
 1. Client-side and sever-side validation: I chose to do validation on both sides so that errors
