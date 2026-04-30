@@ -2,18 +2,22 @@ extends layout
 
 block content
   h2 Customer Comments
+
   div.hero
+    div.comments-layout
 
-    div#comments-list
-
-    p#error-message
-
-    form(id='commentForm')
-        label(for='name') Name
-        input(type='text', id='name', name='name')
-        label(for='message') Message
-        textarea(id='message', name='message')
-        button(type='submit') Post Comment
+      section.comments-form
+        p#error-message
+        form(id='commentForm')
+          label(for='name') Name
+          input(type='text', id='name', name='name')
+          label(for='message') Message
+          textarea(id='message', name='message')
+          button(type='submit') Post Comment
+          
+      div.divider
+      section#comments-list
 
     button#loadMore Load More
+
   script(src='/javascripts/comments.js')

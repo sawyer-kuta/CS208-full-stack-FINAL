@@ -39,6 +39,7 @@ nav a {
   height: auto;
   display: block;
   margin: 0 auto;
+  padding-top: 10px;
 }
 
 .hero {
@@ -50,6 +51,15 @@ nav a {
   margin: 40px;
   border-radius: 10px;
   min-height: 60vh;
+}
+
+.home-img {
+  float: left;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  width: 680px;
+  height: auto;
+  padding-top: 10px;
 }
 
 .menu-container {
@@ -73,11 +83,11 @@ nav a {
   min-height: 60vh;
 }
 
-.hero img {
+.about-img {
   float: left;
   margin-right: 1rem;
   margin-bottom: 1rem;
-  width: 505px;
+  width: 420px;
   height: auto;
 }
 
@@ -90,6 +100,28 @@ form {
   flex-direction: column;
   gap: 0.5rem;
   width: 200px;
+}
+
+.comments-layout {
+  display: flex;
+  gap: 0;
+}
+
+.comments-form {
+  width: 30%;
+  padding: 1rem;
+}
+
+.divider {
+  width: 2px;
+  background-color: #F7C64A;
+  margin: 0 1rem;
+  min-height: 500px;
+}
+
+#comments-list {
+  flex: 1;
+  padding: 1rem;
 }
 
 footer {
