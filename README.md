@@ -48,16 +48,25 @@ On Codespaces, forward port 3000 and open it in your browser.
 
 ## Design Decisions
 
-1. 
-2. 
-3. 
+1. Client-side and sever-side validation: I chose to do validation on both sides so that errors
+    are caught immediately client-side and to prevent malicious input/XSS on the server-side.
+2. Separation of page and API routes for comments: I separated the page route /comments from
+    the API route /api/comments to display comments without fully reloading the page and to
+    keep JSON data protected and separate from HTML.
+3. Stacking menu pages on mobile: I made the choice to stack the menu when viewing on mobile
+    rather than change the viewing option when reading the menu. I changed from an iframe to
+    a flex box for a cleaner look and had to subsequently adjust for mobile viewing.
 
 ## Edge Cases
 
-- Server unreachable:
-- Whitespace-only input:
-- Extremely long input:
-- Double submit:
+- Server unreachable: I added a try/catch block to my comment handler to display a friendly
+    message when the server is unreachable rather than crashing.
+- Whitespace-only input: Should a blank name or comment be input, it will fail the !name.trim()
+    or !message.trim() check and return a 400 error and display a message.
+- Extremely long input: Name and message fields are limited to 20 and 500 characters respectively
+    in the /api/comments route along with the whitespace check, returning the same error code.
+- Double submit: My comment handler disables the submit button once hit and only re-enables it
+    after the request completes.
 
 ## Challenges & Learnings
 
