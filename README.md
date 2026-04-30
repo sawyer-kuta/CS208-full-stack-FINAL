@@ -70,9 +70,19 @@ On Codespaces, forward port 3000 and open it in your browser.
 
 ## Challenges & Learnings
 
-1. 
-2. 
+1. I struggled with getting my comments page to work and had to adjust my code multiple times. I
+    finally realized that it was due to MySQL not running when I ran it though an AI program. I
+    felt like I had broken it and was miserable trying to figure it out.
+2. I also had issues with going back in to add XSS prevention measures and had to change an
+    entire block of code in my loadComments() method. I was able to change it over but had made
+    a mistake when appending the children as I forgot I swaped a div element with an article
+    element.
+3. Making meaningful commits was a difficulty I faced because I had not used git for much
+    other than submitting a final version of an assignments. I would bounce around files and
+    neglect to make commits incrementally.
 
 ## Citations
 
--
+- Google Fonts - https://fonts.google.com (Italianno and Montserrat fonts)
+- MDN Web Docs - https://developer.mozilla.org (Fetch API reference)
+- Claude AI (Anthropic) - Used for guidance and debugging during comment page struggles
